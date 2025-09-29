@@ -1,0 +1,31 @@
+Bi-LSTM + XGBoost Hybrid Architecture - Time Series Cross-Validation Final Report
+============================================================
+
+Cross-validation setup: 5-fold time series cross-validation
+Total samples: 15421
+Feature dimensions: 32D (Bi-LSTM extracted)
+Original class imbalance: 0.51% injury rate
+Resampling strategy: SMOTE (applied independently per fold)
+
+Average performance metrics (¡Àstandard deviation):
+  Precision (injury): 0.010 ¡À 0.018
+  Recall (injury): 0.148 ¡À 0.183
+  F1-Score (injury): 0.018 ¡À 0.032
+
+Overall confusion matrix (5-fold sum):
+[[11879   932]
+ [   27    12]]
+
+Overall performance metrics:
+  Macro Precision: 0.013
+  Macro Recall: 0.308
+  Macro F1-Score: 0.024
+  Macro Accuracy: 0.925
+
+Best single fold performance: Fold 1
+Best F1-Score: 0.081
+
+SHAP explainability analysis:
+  - Generated final SHAP summary plot
+  - Identified Top 10 most important Bi-LSTM features
+  - Provided transparent AI decision explanation
