@@ -1,0 +1,84 @@
+=== Expert-Level Bi-LSTM Feature Learning (Architecture Fixed) ===
+Target: Fix critical training objective and architecture flaws
+PyTorch version: 2.8.0+cpu
+
+=== Step 1: Enhanced Data Loading with Quality Control ===
+Expert insight: Data quality directly impacts feature learning effectiveness
+Loading X_samples.npy and y_labels.npy data...
+数据加载完成:
+  总样本数: 15421
+  X_samples形状: (15421, 32, 22)
+  y_labels形状: (15421,)
+  损伤率: 0.51%
+
+=== Step 2: Expert Data Preprocessing ===
+使用RobustScaler处理生理数据，增强异常值鲁棒性
+[OK] 应用RobustScaler完成
+
+=== Step 3: Expert Stratified Split ===
+确保验证集有足够的损伤样本用于特征质量评估
+训练集: 12336 样本, 损伤率: 0.50%
+验证集: 3085 样本, 损伤率: 0.52%
+
+=== Step 4: Enhanced Data Loaders ===
+训练批次: 192, 验证批次: 49
+
+=== Step 5: Enhanced Bi-LSTM Architecture ===
+专家升级：增加模型容量，优化特征提取能力
+增强模型参数: 954,400
+架构: Bi-LSTM(22, 128, 3) → 32
+
+=== Step 6: Expert Training Configuration ===
+关键修复：使用对比损失函数，专门优化特征提取
+训练配置:
+  损失函数: ContrastiveFeatureLoss (专家级对比损失)
+  优化器: AdamW with weight decay
+  学习率调度: ReduceLROnPlateau
+  特征维度: 32
+
+=== Step 7: Expert Training Loop ===
+革命性：实时监控特征质量，确保学到有用的特征
+开始专家级训练...
+轮次 | 训练损失 | 验证损失 | LDA得分 | 估计PR AUC | 学习率 | 状态
+----------------------------------------------------------------------
+   0 |    0.0392 |   0.0400 |   0.987 |       0.055 | 1.0e-03 | [IMPROVED]
+   5 |    0.0382 |   0.0400 |   0.993 |       0.173 | 1.0e-03 | [IMPROVED]
+  10 |    0.0375 |   0.0404 |   0.989 |       0.026 | 1.0e-03 | 耐心 1
+  15 |    0.0390 |   0.0396 |   0.988 |       0.088 | 1.0e-03 | 耐心 2
+  20 |    0.0383 |   0.0393 |   0.993 |       0.087 | 1.0e-03 | 耐心 3
+  25 |    0.0306 |   0.0363 |   0.996 |       0.209 | 1.0e-03 | [IMPROVED]
+
+=== 训练完成！ ===
+最佳验证特征质量 (估计PR AUC): 0.209
+Traceback (most recent call last):
+  File "E:\AIMeeting\projrct\project\code\05LSTMsplit_expert_fixed.py", line 492, in <module>
+    return final_features, final_quality, feature_quality_evaluator
+                                               ^^^^^^
+  File "E:\AIMeeting\projrct\project\code\05LSTMsplit_expert_fixed.py", line 409, in main
+    print(f'最佳验证特征质量 (估计PR AUC): {best_val_quality:.3f}')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\AIMeeting\projrct\project\code\05LSTMsplit_expert_fixed.py", line 171, in plot_history
+    plt.savefig(r'E:eature_quality_history.png', dpi=300, bbox_inches='tight')
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\pyplot.py", line 1134, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\figure.py", line 3390, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\backends\backend_qtagg.py", line 75, in print_figure
+    super().print_figure(*args, **kwargs)
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\backend_bases.py", line 2193, in print_figure
+    result = print_method(
+             ^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\backend_bases.py", line 2043, in <lambda>
+    print_method = functools.wraps(meth)(lambda *args, **kwargs: meth(
+                                                                 ^^^^^
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\backends\backend_agg.py", line 497, in print_png
+    self._print_pil(filename_or_obj, "png", pil_kwargs, metadata)
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\backends\backend_agg.py", line 446, in _print_pil
+    mpl.image.imsave(
+  File "D:\ProgramData\anaconda3\Lib\site-packages\matplotlib\image.py", line 1656, in imsave
+    image.save(fname, **pil_kwargs)
+  File "D:\ProgramData\anaconda3\Lib\site-packages\PIL\Image.py", line 2563, in save
+    fp = builtins.open(filename, "w+b")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: 'E:\\AIMeeting\\projrct\\project\\code\\\x0ceature_quality_history.png'
